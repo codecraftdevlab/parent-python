@@ -1,87 +1,83 @@
 """
-API endpoints for the project.
+API endpoints for the application.
+
+This file contains functions that handle API requests and return responses.
 """
 
-from flask import Flask, request, jsonify
-from services import OrderService, PaymentService
-from models import Order, OrderOffer, OrderPricing, OrderTaxes
+from fastapi import FastAPI, HTTPException
+from .services import OrderService, CustomerService, ProductService
+from .models import Order, Customer, Product
+from .config import API_HOST, API_PORT
 
-app = Flask(__name__)
+app = FastAPI()
 
-order_service = OrderService(Config())
-payment_service = PaymentService(Config())
+order_service = OrderService()
+customer_service = CustomerService()
+product_service = ProductService()
 
-@app.route('/orders', methods=['GET'])
-def get_orders():
+@app.get("/orders/{order_id}")
+async def get_order(order_id: int):
     """
-    Get all orders.
-    
-    Returns:
-        json: A JSON response with the orders.
-    """
-    orders = []
-    # Logic to get orders
-    return jsonify(orders)
+    Retrieves an order by ID.
 
-@app.route('/orders/<int:order_id>', methods=['GET'])
-def get_order(order_id):
-    """
-    Get an order by ID.
-    
     Args:
         order_id (int): The order ID.
-    
-    Returns:
-        json: A JSON response with the order.
-    """
-    order = Order(order_id, 1, "2022-01-01")
-    # Logic to get order
-    return jsonify(order.__dict__)
 
-@app.route('/orders/<int:order_id>/offers', methods=['GET'])
-def get_order_offers(order_id):
+    Returns:
+        Order: The order with the specified ID.
     """
-    Get the offers for an order.
-    
+    order = order_service.get_order(order_id)
+    if order:
+        return order.to_dict()
+    else:
+        raise HTTPException(status_code=404, detail="Order not found")
+
+@app.post("/orders")
+async def create_order(customer_id: int, product_id: int, price: float):
+    """
+    Creates a new order.
+
     Args:
-        order_id (int): The order ID.
-    
-    Returns:
-        json: A JSON response with the offers.
-    """
-    offers = []
-    # Logic to get offers
-    return jsonify(offers)
+        customer_id (int): The customer ID.
+        product_id (int): The product ID.
+        price (float): The order price.
 
-@app.route('/orders/<int:order_id>/pricing', methods=['GET'])
-def get_order_pricing(order_id):
+    Returns:
+        Order: The newly created order.
     """
-    Get the pricing for an order.
-    
+    order = order_service.create_order(customer_id, product_id, price)
+    return order.to_dict()
+
+@app.get("/customers/{customer_id}")
+async def get_customer(customer_id: int):
+    """
+    Retrieves a customer by ID.
+
     Args:
-        order_id (int): The order ID.
-    
-    Returns:
-        json: A JSON response with the pricing.
-    """
-    pricing = OrderPricing(1, order_id, 100.0)
-    # Logic to get pricing
-    return jsonify(pricing.__dict__)
+        customer_id (int): The customer ID.
 
-@app.route('/orders/<int:order_id>/taxes', methods=['GET'])
-def get_order_taxes(order_id):
+    Returns:
+        Customer: The customer with the specified ID.
     """
-    Get the taxes for an order.
-    
+    customer = customer_service.get_customer(customer_id)
+    if customer:
+        return customer.to_dict()
+    else:
+        raise HTTPException(status_code=404, detail="Customer not found")
+
+@app.get("/products/{product_id}")
+async def get_product(product_id: int):
+    """
+    Retrieves a product by ID.
+
     Args:
-        order_id (int): The order ID.
-    
-    Returns:
-        json: A JSON response with the taxes.
-    """
-    taxes = OrderTaxes(1, order_id, 10.0)
-    # Logic to get taxes
-    return jsonify(taxes.__dict__)
+        product_id (int): The product ID.
 
-if __name__ == '__main__':
-    app.run(debug=True)
+    Returns:
+        Product: The product with the specified ID.
+    """
+    product = product_service.get_product(product_id)
+    if product:
+        return product.to_dict()
+    else:
+        raise HTTPException(status_code=404, detail="Product not found")

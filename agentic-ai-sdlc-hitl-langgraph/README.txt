@@ -26,5 +26,7 @@ pip install --extra-index-url https://pypi.org/simple/ -r requirements.txt
 $env:PYTHONUTF8 = "1"
 streamlit run streamlit_app.py
 
+http://localhost:8501/
+
 Requirement:
 upgrade services: order-offers, order-pricing, order-taxes to spring boot 4

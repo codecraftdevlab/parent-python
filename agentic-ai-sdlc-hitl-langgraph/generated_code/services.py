@@ -1,93 +1,131 @@
 """
-Business logic for the project.
+Business logic for the application.
+
+This file contains classes and functions that encapsulate the business logic of the application.
 """
 
-from models import Order, OrderOffer, OrderPricing, OrderTaxes
-from config import Config
+from .models import Order, Customer, Product
+from .config import DB_HOST, DB_PORT, DB_USERNAME, DB_PASSWORD, DB_NAME
+import mysql.connector
 
 class OrderService:
     """
-    Order service.
+    Provides methods for working with orders.
+
+    Attributes:
+        db_connection (mysql.connector.connection.MySQLConnection): The database connection.
     """
 
-    def __init__(self, config):
+    def __init__(self):
+        self.db_connection = mysql.connector.connect(
+            host=DB_HOST,
+            port=DB_PORT,
+            user=DB_USERNAME,
+            password=DB_PASSWORD,
+            database=DB_NAME
+        )
+
+    def get_order(self, order_id: int) -> Order:
         """
-        Initialize the order service.
-        
+        Retrieves an order by ID.
+
         Args:
-            config (Config): The configuration.
-        """
-        self.config = config
+            order_id (int): The order ID.
 
-    def upgrade_order_offers(self):
-        """
-        Upgrade the order offers to Spring Boot 4.
-        
         Returns:
-            bool: True if the upgrade was successful, False otherwise.
+            Order: The order with the specified ID.
         """
-        # Upgrade logic for order offers
-        return True
+        cursor = self.db_connection.cursor()
+        cursor.execute("SELECT * FROM orders WHERE id = %s", (order_id,))
+        row = cursor.fetchone()
+        if row:
+            return Order(row[0], row[1], row[2], row[3])
+        else:
+            return None
 
-    def upgrade_order_pricing(self):
+    def create_order(self, customer_id: int, product_id: int, price: float) -> Order:
         """
-        Upgrade the order pricing to Spring Boot 4.
-        
-        Returns:
-            bool: True if the upgrade was successful, False otherwise.
-        """
-        # Upgrade logic for order pricing
-        return True
+        Creates a new order.
 
-    def migrate_order_taxes(self):
-        """
-        Migrate the order taxes to Spring Boot 4.
-        
-        Returns:
-            bool: True if the migration was successful, False otherwise.
-        """
-        # Migration logic for order taxes
-        return True
-
-    def ensure_backward_compatibility(self):
-        """
-        Ensure backward compatibility with existing integrations.
-        
-        Returns:
-            bool: True if the compatibility was ensured, False otherwise.
-        """
-        # Backward compatibility logic
-        return True
-
-    def include_automated_tests(self):
-        """
-        Include automated tests and validation.
-        
-        Returns:
-            bool: True if the tests were included, False otherwise.
-        """
-        # Automated test logic
-        return True
-
-class PaymentService:
-    """
-    Payment service.
-    """
-
-    def __init__(self, config):
-        """
-        Initialize the payment service.
-        
         Args:
-            config (Config): The configuration.
-        """
-        self.config = config
+            customer_id (int): The customer ID.
+            product_id (int): The product ID.
+            price (float): The order price.
 
-    def is_payment_service_integrated(self):
-        """
-        Check if the payment service is integrated.
-        
         Returns:
-            bool: True if the payment service is integrated, False otherwise.
+            Order: The newly created order.
         """
-        return self.config.is_payment_service_integrated()
+        cursor = self.db_connection.cursor()
+        cursor.execute("INSERT INTO orders (customer_id, product_id, price) VALUES (%s, %s, %s)", (customer_id, product_id, price))
+        self.db_connection.commit()
+        return Order(cursor.lastrowid, customer_id, product_id, price)
+
+class CustomerService:
+    """
+    Provides methods for working with customers.
+
+    Attributes:
+        db_connection (mysql.connector.connection.MySQLConnection): The database connection.
+    """
+
+    def __init__(self):
+        self.db_connection = mysql.connector.connect(
+            host=DB_HOST,
+            port=DB_PORT,
+            user=DB_USERNAME,
+            password=DB_PASSWORD,
+            database=DB_NAME
+        )
+
+    def get_customer(self, customer_id: int) -> Customer:
+        """
+        Retrieves a customer by ID.
+
+        Args:
+            customer_id (int): The customer ID.
+
+        Returns:
+            Customer: The customer with the specified ID.
+        """
+        cursor = self.db_connection.cursor()
+        cursor.execute("SELECT * FROM customers WHERE id = %s", (customer_id,))
+        row = cursor.fetchone()
+        if row:
+            return Customer(row[0], row[1])
+        else:
+            return None
+
+class ProductService:
+    """
+    Provides methods for working with products.
+
+    Attributes:
+        db_connection (mysql.connector.connection.MySQLConnection): The database connection.
+    """
+
+    def __init__(self):
+        self.db_connection = mysql.connector.connect(
+            host=DB_HOST,
+            port=DB_PORT,
+            user=DB_USERNAME,
+            password=DB_PASSWORD,
+            database=DB_NAME
+        )
+
+    def get_product(self, product_id: int) -> Product:
+        """
+        Retrieves a product by ID.
+
+        Args:
+            product_id (int): The product ID.
+
+        Returns:
+            Product: The product with the specified ID.
+        """
+        cursor = self.db_connection.cursor()
+        cursor.execute("SELECT * FROM products WHERE id = %s", (product_id,))
+        row = cursor.fetchone()
+        if row:
+            return Product(row[0], row[1])
+        else:
+            return None

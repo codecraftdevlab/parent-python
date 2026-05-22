@@ -1,111 +1,88 @@
 """
-Data models for the project.
+Data models for the application.
+
+This file contains classes representing the data structures used in the application.
 """
+
+from typing import Dict
 
 class Order:
     """
-    Order model.
+    Represents an order.
+
+    Attributes:
+        id (int): The order ID.
+        customer_id (int): The customer ID.
+        product_id (int): The product ID.
+        price (float): The order price.
     """
 
-    def __init__(self, id, customer_id, order_date):
-        """
-        Initialize the order.
-        
-        Args:
-            id (int): The order ID.
-            customer_id (int): The customer ID.
-            order_date (str): The order date.
-        """
+    def __init__(self, id: int, customer_id: int, product_id: int, price: float):
         self.id = id
         self.customer_id = customer_id
-        self.order_date = order_date
-
-    def __str__(self):
-        """
-        Get the string representation of the order.
-        
-        Returns:
-            str: The string representation of the order.
-        """
-        return f"Order {self.id} for customer {self.customer_id} on {self.order_date}"
-
-class OrderOffer:
-    """
-    Order offer model.
-    """
-
-    def __init__(self, id, order_id, offer_date):
-        """
-        Initialize the order offer.
-        
-        Args:
-            id (int): The order offer ID.
-            order_id (int): The order ID.
-            offer_date (str): The offer date.
-        """
-        self.id = id
-        self.order_id = order_id
-        self.offer_date = offer_date
-
-    def __str__(self):
-        """
-        Get the string representation of the order offer.
-        
-        Returns:
-            str: The string representation of the order offer.
-        """
-        return f"Order offer {self.id} for order {self.order_id} on {self.offer_date}"
-
-class OrderPricing:
-    """
-    Order pricing model.
-    """
-
-    def __init__(self, id, order_id, price):
-        """
-        Initialize the order pricing.
-        
-        Args:
-            id (int): The order pricing ID.
-            order_id (int): The order ID.
-            price (float): The price.
-        """
-        self.id = id
-        self.order_id = order_id
+        self.product_id = product_id
         self.price = price
 
-    def __str__(self):
+    def to_dict(self) -> Dict:
         """
-        Get the string representation of the order pricing.
-        
+        Returns a dictionary representation of the order.
+
         Returns:
-            str: The string representation of the order pricing.
+            Dict: A dictionary containing the order's attributes.
         """
-        return f"Order pricing {self.id} for order {self.order_id} with price {self.price}"
+        return {
+            'id': self.id,
+            'customer_id': self.customer_id,
+            'product_id': self.product_id,
+            'price': self.price
+        }
 
-class OrderTaxes:
+class Customer:
     """
-    Order taxes model.
+    Represents a customer.
+
+    Attributes:
+        id (int): The customer ID.
+        name (str): The customer name.
     """
 
-    def __init__(self, id, order_id, tax_amount):
-        """
-        Initialize the order taxes.
-        
-        Args:
-            id (int): The order taxes ID.
-            order_id (int): The order ID.
-            tax_amount (float): The tax amount.
-        """
+    def __init__(self, id: int, name: str):
         self.id = id
-        self.order_id = order_id
-        self.tax_amount = tax_amount
+        self.name = name
 
-    def __str__(self):
+    def to_dict(self) -> Dict:
         """
-        Get the string representation of the order taxes.
-        
+        Returns a dictionary representation of the customer.
+
         Returns:
-            str: The string representation of the order taxes.
+            Dict: A dictionary containing the customer's attributes.
         """
-        return f"Order taxes {self.id} for order {self.order_id} with tax amount {self.tax_amount}"
+        return {
+            'id': self.id,
+            'name': self.name
+        }
+
+class Product:
+    """
+    Represents a product.
+
+    Attributes:
+        id (int): The product ID.
+        name (str): The product name.
+    """
+
+    def __init__(self, id: int, name: str):
+        self.id = id
+        self.name = name
+
+    def to_dict(self) -> Dict:
+        """
+        Returns a dictionary representation of the product.
+
+        Returns:
+            Dict: A dictionary containing the product's attributes.
+        """
+        return {
+            'id': self.id,
+            'name': self.name
+        }

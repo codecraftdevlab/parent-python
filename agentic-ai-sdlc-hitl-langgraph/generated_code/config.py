@@ -1,55 +1,22 @@
 """
-Configuration file for the project.
+Configuration file for the application.
+
+This file contains environment setup and constants used throughout the application.
 """
 
 import os
 
-class Config:
-    """
-    Configuration class.
-    """
+# Database connection settings
+DB_HOST = os.environ.get('DB_HOST', 'localhost')
+DB_PORT = int(os.environ.get('DB_PORT', 3306))
+DB_USERNAME = os.environ.get('DB_USERNAME', 'root')
+DB_PASSWORD = os.environ.get('DB_PASSWORD', 'password')
+DB_NAME = os.environ.get('DB_NAME', 'order_database')
 
-    def __init__(self):
-        """
-        Initialize the configuration.
-        """
-        self.spring_boot_version = "4"
-        self.docker_enabled = True
-        self.payment_serviceIntegrated = True
-        self.admin_access = True
+# OAuth 2.0 authentication settings
+OAUTH_CLIENT_ID = os.environ.get('OAUTH_CLIENT_ID', 'client_id')
+OAUTH_CLIENT_SECRET = os.environ.get('OAUTH_CLIENT_SECRET', 'client_secret')
 
-    def get_spring_boot_version(self):
-        """
-        Get the Spring Boot version.
-        
-        Returns:
-            str: The Spring Boot version.
-        """
-        return self.spring_boot_version
-
-    def is_docker_enabled(self):
-        """
-        Check if Docker is enabled.
-        
-        Returns:
-            bool: True if Docker is enabled, False otherwise.
-        """
-        return self.docker_enabled
-
-    def is_payment_service_integrated(self):
-        """
-        Check if the payment service is integrated.
-        
-        Returns:
-            bool: True if the payment service is integrated, False otherwise.
-        """
-        return self.payment_serviceIntegrated
-
-    def has_admin_access(self):
-        """
-        Check if the admin has access.
-        
-        Returns:
-            bool: True if the admin has access, False otherwise.
-        """
-        return self.admin_access
+# API settings
+API_HOST = os.environ.get('API_HOST', 'localhost')
+API_PORT = int(os.environ.get('API_PORT', 8080))
