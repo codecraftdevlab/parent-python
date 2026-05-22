@@ -3,7 +3,7 @@ with content GROQ_API_KEY=<<actual key>>
 --------------------------------------------------------------------
 MAC
 --------------------------------------------------------------------
-
+cd
 python3.12 -m venv venv
 source venv/bin/activate
 
