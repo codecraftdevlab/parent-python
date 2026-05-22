@@ -1,0 +1,13 @@
+[Test Case Name]: Calculate Taxes - Negative (Null Order)
+
+[Description]:
+Tests the system's behavior when calculating the taxes for a null order.
+
+[Test Type]: Negative
+
+[Test Steps]:
+1. Pass a null Order object to the OrderService calculate_taxes method
+2. Observe the API response
+
+[Expected Result]:
+A NullPointerException or equivalent error message

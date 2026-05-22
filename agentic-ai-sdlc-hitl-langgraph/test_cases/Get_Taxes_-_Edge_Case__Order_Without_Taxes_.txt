@@ -1,0 +1,14 @@
+[Test Case Name]: Get Taxes - Edge Case (Order Without Taxes)
+
+[Description]:
+Tests the system's behavior when retrieving the taxes for an order without tax information.
+
+[Test Type]: Edge
+
+[Test Steps]:
+1. Send a GET request to /orders/1/taxes
+2. Mock the OrderService to return an Order object without taxes
+3. Receive the response
+
+[Expected Result]:
+A 200 OK response with an empty or default tax object

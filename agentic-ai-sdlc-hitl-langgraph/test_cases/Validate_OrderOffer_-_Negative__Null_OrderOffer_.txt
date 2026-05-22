@@ -1,0 +1,13 @@
+[Test Case Name]: Validate OrderOffer - Negative (Null OrderOffer)
+
+[Description]:
+Tests the system's behavior when validating a null order offer.
+
+[Test Type]: Negative
+
+[Test Steps]:
+1. Pass a null OrderOffer object to the OrderOfferService validate method
+2. Observe the API response
+
+[Expected Result]:
+A NullPointerException or equivalent error message

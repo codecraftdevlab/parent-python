@@ -1,94 +1,73 @@
+"""
+Data models for the application
+"""
+
+from typing import Dict
+
 class Order:
     """
-    Represents an order.
+    Represents an order
     """
+    def __init__(self, id: int, offers: Dict, pricing: Dict, taxes: Dict):
+        """
+        Initializes an Order object
 
-    def __init__(self, id, price, taxes, fees):
+        Args:
+            id (int): The order ID
+            offers (Dict): The order offers
+            pricing (Dict): The order pricing
+            taxes (Dict): The order taxes
+        """
         self.id = id
-        self.price = price
+        self.offers = offers
+        self.pricing = pricing
         self.taxes = taxes
-        self.fees = fees
 
-    def get_id(self):
-        """
-        Returns the order ID.
-        :return: int
-        """
-        return self.id
-
-    def get_price(self):
-        """
-        Returns the order price.
-        :return: float
-        """
-        return self.price
-
-    def get_taxes(self):
-        """
-        Returns the order taxes.
-        :return: float
-        """
-        return self.taxes
-
-    def get_fees(self):
-        """
-        Returns the order fees.
-        :return: float
-        """
-        return self.fees
-
-
-class Pricing:
+class OrderOffer:
     """
-    Represents pricing information.
+    Represents an order offer
     """
+    def __init__(self, id: int, name: str, price: float):
+        """
+        Initializes an OrderOffer object
 
-    def __init__(self, id, price):
+        Args:
+            id (int): The offer ID
+            name (str): The offer name
+            price (float): The offer price
+        """
         self.id = id
+        self.name = name
         self.price = price
 
-    def get_id(self):
-        """
-        Returns the pricing ID.
-        :return: int
-        """
-        return self.id
-
-    def get_price(self):
-        """
-        Returns the pricing information.
-        :return: float
-        """
-        return self.price
-
-
-class TaxesFees:
+class OrderPricing:
     """
-    Represents taxes and fees information.
+    Represents an order pricing
     """
+    def __init__(self, id: int, base_price: float, discount: float):
+        """
+        Initializes an OrderPricing object
 
-    def __init__(self, id, taxes, fees):
+        Args:
+            id (int): The pricing ID
+            base_price (float): The base price
+            discount (float): The discount
+        """
         self.id = id
-        self.taxes = taxes
-        self.fees = fees
+        self.base_price = base_price
+        self.discount = discount
 
-    def get_id(self):
+class OrderTax:
+    """
+    Represents an order tax
+    """
+    def __init__(self, id: int, tax_rate: float):
         """
-        Returns the taxes and fees ID.
-        :return: int
-        """
-        return self.id
+        Initializes an OrderTax object
 
-    def get_taxes(self):
+        Args:
+            id (int): The tax ID
+            tax_rate (float): The tax rate
         """
-        Returns the taxes information.
-        :return: float
-        """
-        return self.taxes
-
-    def get_fees(self):
-        """
-        Returns the fees information.
-        :return: float
-        """
-        return self.fees
+        self.id = id
+        self.tax_rate = tax_rate

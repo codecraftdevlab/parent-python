@@ -1,0 +1,14 @@
+[Test Case Name]: Validate Order - Happy Path
+
+[Description]:
+Tests whether the system can validate an order successfully.
+
+[Test Type]: Unit
+
+[Test Steps]:
+1. Create an Order object with valid data
+2. Call the OrderService validate method
+3. Receive the response
+
+[Expected Result]:
+A valid Order object with no error messages

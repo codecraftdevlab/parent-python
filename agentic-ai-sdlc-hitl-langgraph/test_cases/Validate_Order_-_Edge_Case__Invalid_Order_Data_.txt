@@ -1,0 +1,14 @@
+[Test Case Name]: Validate Order - Edge Case (Invalid Order Data)
+
+[Description]:
+Tests the system's behavior when validating an order with invalid data.
+
+[Test Type]: Edge
+
+[Test Steps]:
+1. Create an Order object with invalid data (e.g., missing ID)
+2. Call the OrderService validate method
+3. Receive the response
+
+[Expected Result]:
+An error message indicating the invalid data

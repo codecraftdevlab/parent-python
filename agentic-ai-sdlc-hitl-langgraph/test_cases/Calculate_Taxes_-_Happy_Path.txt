@@ -1,0 +1,14 @@
+[Test Case Name]: Calculate Taxes - Happy Path
+
+[Description]:
+Tests whether the system can calculate the taxes for an order successfully.
+
+[Test Type]: Unit
+
+[Test Steps]:
+1. Create an Order object with valid data
+2. Call the OrderService calculate_taxes method
+3. Receive the response
+
+[Expected Result]:
+A valid OrderTax object with calculated taxes

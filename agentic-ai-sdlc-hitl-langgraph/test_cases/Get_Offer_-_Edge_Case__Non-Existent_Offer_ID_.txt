@@ -1,0 +1,14 @@
+[Test Case Name]: Get Offer - Edge Case (Non-Existent Offer ID)
+
+[Description]:
+Tests the system's behavior when retrieving a non-existent offer by ID.
+
+[Test Type]: Edge
+
+[Test Steps]:
+1. Send a GET request to /offers/999
+2. Mock the OrderOfferService to return None
+3. Receive the response
+
+[Expected Result]:
+A 404 Not Found response with an error message

@@ -1,0 +1,14 @@
+[Test Case Name]: Get Offer - Happy Path (Valid Offer ID)
+
+[Description]:
+Tests whether the system can retrieve an offer by ID successfully.
+
+[Test Type]: Unit
+
+[Test Steps]:
+1. Send a GET request to /offers/1
+2. Mock the OrderOfferService to return a valid OrderOffer object
+3. Receive the response
+
+[Expected Result]:
+A 200 OK response with the OrderOffer object in JSON format

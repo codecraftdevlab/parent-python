@@ -1,9 +1,9 @@
 📘 User Stories
 ========================================
 
-1. As a developer, I want to upgrade the order-offers service to Spring Boot 4 so that I can leverage its improved performance and security features.
-2. As an administrator, I want to ensure the order-pricing-service is compatible with Spring Boot 4 so that our system remains stable and efficient.
-3. As a quality assurance engineer, I want to test the order-taxes-fees service after upgrading to Spring Boot 4 so that I can verify its functionality and identify potential issues.
-4. As a DevOps engineer, I want to deploy the upgraded order-offers, order-pricing-service, and order-taxes-fees services to a production environment so that our users can benefit from the latest features and improvements.
-5. As a security expert, I want to review the upgraded services for potential security vulnerabilities so that I can ensure the protection of sensitive user data.
-6. As an end-user, I want to experience improved application responsiveness and reliability after the services have been upgraded to Spring Boot 4 so that I can complete my tasks efficiently.
+1. As an administrator, I want the order-offers service to be upgraded to Spring Boot 4 so that I can take advantage of the latest security patches and features.
+2. As a customer, I want the order-pricing service to be upgraded to Spring Boot 4 so that I can receive accurate and up-to-date pricing information for my orders.
+3. As a developer, I want the order-taxes service to be upgraded to Spring Boot 4 so that I can leverage the latest dependencies and libraries to calculate taxes correctly.
+4. As a system operator, I want the upgraded services to be backward compatible with existing APIs so that I can ensure a seamless transition with minimal disruptions to users.
+5. As a quality assurance engineer, I want the upgraded services to include automated tests and validation so that I can verify the correctness and stability of the services.
+6. As an end-user, I want the upgraded services to provide a responsive and efficient user experience so that I can quickly and easily place orders and receive accurate information about my orders.

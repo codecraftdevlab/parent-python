@@ -95,7 +95,7 @@ st.markdown(" → ".join(f"{progress_badge(n)} {n}" for n in flow_order))
 
 
 # Tab-based layout
-tabs = st.tabs(["User Requirements", "User Stories", "Design Document", "Code", "Test Cases", "Security", "QA", "Deployment"])
+tabs = st.tabs(["User Requirements", "User Stories", "Design Document", "Code", "Security", "Test Cases", "QA", "Deployment"])
 state = st.session_state.state
 
 with tabs[0]:
@@ -205,29 +205,6 @@ with tabs[3]:
             st.rerun()
 
 with tabs[4]:
-    st.header("🧪 Test Cases")
-    test_cases = st.session_state.state.get("test_cases", "No test cases yet.")
-    st.text_area("Test Cases:", test_cases, height=300, key="test_cases_display")
-    
-    # Show approval UI if we have test cases
-    if test_cases and test_cases != "No test cases yet.":
-        status = st.radio("Approve the Test Cases?", ["Approve", "Denied"], key="test_cases_approval")
-        feedback = st.text_area("Feedback (if denied):", key="test_cases_feedback")
-        if st.button("Continue from Test Case Review", key="test_cases_continue"):
-            graph.update_state(
-                st.session_state.thread,
-                {"test_cases_review_status": status, "test_cases_review_feedback": [feedback]},
-                as_node="Human Test Cases Review"
-            )
-            for event in graph.stream(None, st.session_state.thread):
-                st.session_state.events.append(event)
-                for node, output in event.items():
-                    if isinstance(output, dict):
-                        st.session_state.state.update(output)
-                    st.session_state.active_node = node
-            st.rerun()
-
-with tabs[5]:
     st.header("🔒 Security Review")
     st.write("**Security Feedback:**")
     security_feedback = st.session_state.state.get("security_review_feedback", "N/A")
@@ -242,6 +219,29 @@ with tabs[5]:
                 st.session_state.thread,
                 {"security_review_status": status, "security_feedback": security_feedback_text},
                 as_node="Human Security Review"
+            )
+            for event in graph.stream(None, st.session_state.thread):
+                st.session_state.events.append(event)
+                for node, output in event.items():
+                    if isinstance(output, dict):
+                        st.session_state.state.update(output)
+                    st.session_state.active_node = node
+            st.rerun()
+
+with tabs[5]:
+    st.header("🧪 Test Cases")
+    test_cases = st.session_state.state.get("test_cases", "No test cases yet.")
+    st.text_area("Test Cases:", test_cases, height=300, key="test_cases_display")
+
+    # Show approval UI if we have test cases
+    if test_cases and test_cases != "No test cases yet.":
+        status = st.radio("Approve the Test Cases?", ["Approve", "Denied"], key="test_cases_approval")
+        feedback = st.text_area("Feedback (if denied):", key="test_cases_feedback")
+        if st.button("Continue from Test Case Review", key="test_cases_continue"):
+            graph.update_state(
+                st.session_state.thread,
+                {"test_cases_review_status": status, "test_cases_review_feedback": [feedback]},
+                as_node="Human Test Cases Review"
             )
             for event in graph.stream(None, st.session_state.thread):
                 st.session_state.events.append(event)

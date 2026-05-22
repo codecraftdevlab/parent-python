@@ -1,39 +1,70 @@
-from fastapi import FastAPI
-from services import OrderService, PricingService, TaxesFeesService
-from models import Order, Pricing, TaxesFees
-from config import Config
+"""
+API endpoints for the application
+"""
 
-app = FastAPI()
+from flask import Flask, jsonify, request
+from models import Order, OrderOffer, OrderPricing, OrderTax
+from services import OrderService, OrderOfferService
 
-config = Config()
-order_service = OrderService(config)
-pricing_service = PricingService(config)
-taxes_fees_service = TaxesFeesService(config)
+app = Flask(__name__)
 
-@app.get("/orders/{order_id}")
-def get_order(order_id: int):
-    """
-    Returns the order information for the given order ID.
-    :param order_id: int
-    :return: Order
-    """
-    # Order logic here
-    return Order(order_id, 100.0, 10.0, 5.0)
+order_service = OrderService()
+order_offer_service = OrderOfferService()
 
-@app.get("/pricing/{order_id}")
-def get_pricing(order_id: int):
+@app.route('/orders/<int:id>', methods=['GET'])
+def get_order(id: int):
     """
-    Returns the pricing information for the given order ID.
-    :param order_id: int
-    :return: Pricing
-    """
-    return pricing_service.get_pricing(order_id)
+    Retrieves an order by ID
 
-@app.get("/taxes-fees/{order_id}")
-def get_taxes_fees(order_id: int):
+    Args:
+        id (int): The order ID
+
+    Returns:
+        jsonify: The order object as JSON
     """
-    Returns the taxes and fees information for the given order ID.
-    :param order_id: int
-    :return: TaxesFees
+    order = order_service.get_order(id)
+    return jsonify(order.__dict__)
+
+@app.route('/orders/<int:id>/pricing', methods=['GET'])
+def get_pricing(id: int):
     """
-    return taxes_fees_service.get_taxes_fees(order_id)
+    Retrieves the pricing for an order
+
+    Args:
+        id (int): The order ID
+
+    Returns:
+        jsonify: The pricing object as JSON
+    """
+    order = order_service.get_order(id)
+    pricing = order_service.calculate_pricing(order)
+    return jsonify(pricing.__dict__)
+
+@app.route('/orders/<int:id>/taxes', methods=['GET'])
+def get_taxes(id: int):
+    """
+    Retrieves the taxes for an order
+
+    Args:
+        id (int): The order ID
+
+    Returns:
+        jsonify: The tax object as JSON
+    """
+    order = order_service.get_order(id)
+    taxes = order_service.calculate_taxes(order)
+    return jsonify(taxes.__dict__)
+
+@app.route('/offers/<int:id>', methods=['GET'])
+def get_offer(id: int):
+    """
+    Retrieves an offer by ID
+
+    Args:
+        id (int): The offer ID
+
+    Returns:
+        jsonify: The offer object as JSON
+    """
+    offer = order_offer_service.get_offer(id)
+    return jsonify(offer.__dict__)

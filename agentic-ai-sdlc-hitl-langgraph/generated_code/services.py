@@ -1,70 +1,78 @@
-from models import Order, Pricing, TaxesFees
-from config import Config
+"""
+Business logic for the application
+"""
+
+from typing import Dict
+from models import Order, OrderOffer, OrderPricing, OrderTax
 
 class OrderService:
     """
-    Represents the order service.
+    Provides order-related business logic
     """
-
-    def __init__(self, config):
-        self.config = config
-
-    def upgrade_to_spring_boot_4(self):
+    def __init__(self):
         """
-        Upgrades the order service to Spring Boot 4.
-        :return: None
+        Initializes the OrderService
         """
-        # Upgrade logic here
-        print("Upgraded to Spring Boot 4")
+        pass
 
-    def ensure_pricing_service_compatibility(self):
+    def get_order(self, id: int) -> Order:
         """
-        Ensures the pricing service is compatible with Spring Boot 4.
-        :return: None
-        """
-        # Compatibility check logic here
-        print("Pricing service is compatible with Spring Boot 4")
+        Retrieves an order by ID
 
-    def test_taxes_fees_service(self):
-        """
-        Tests the taxes and fees service after upgrading to Spring Boot 4.
-        :return: None
-        """
-        # Test logic here
-        print("Taxes and fees service tested successfully")
+        Args:
+            id (int): The order ID
 
+        Returns:
+            Order: The order object
+        """
+        # Simulate retrieving an order from the database
+        return Order(id, {}, {}, {})
 
-class PricingService:
+    def calculate_pricing(self, order: Order) -> OrderPricing:
+        """
+        Calculates the pricing for an order
+
+        Args:
+            order (Order): The order object
+
+        Returns:
+            OrderPricing: The pricing object
+        """
+        # Simulate calculating the pricing
+        return OrderPricing(1, 100.0, 10.0)
+
+    def calculate_taxes(self, order: Order) -> OrderTax:
+        """
+        Calculates the taxes for an order
+
+        Args:
+            order (Order): The order object
+
+        Returns:
+            OrderTax: The tax object
+        """
+        # Simulate calculating the taxes
+        return OrderTax(1, 0.08)
+
+class OrderOfferService:
     """
-    Represents the pricing service.
+    Provides order offer-related business logic
     """
-
-    def __init__(self, config):
-        self.config = config
-
-    def get_pricing(self, order_id):
+    def __init__(self):
         """
-        Returns the pricing information for the given order ID.
-        :param order_id: int
-        :return: Pricing
+        Initializes the OrderOfferService
         """
-        # Pricing logic here
-        return Pricing(order_id, 100.0)
+        pass
 
-
-class TaxesFeesService:
-    """
-    Represents the taxes and fees service.
-    """
-
-    def __init__(self, config):
-        self.config = config
-
-    def get_taxes_fees(self, order_id):
+    def get_offer(self, id: int) -> OrderOffer:
         """
-        Returns the taxes and fees information for the given order ID.
-        :param order_id: int
-        :return: TaxesFees
+        Retrieves an offer by ID
+
+        Args:
+            id (int): The offer ID
+
+        Returns:
+            OrderOffer: The offer object
         """
-        # Taxes and fees logic here
-        return TaxesFees(order_id, 10.0, 5.0)
+        # Simulate retrieving an offer from the database
+        return OrderOffer(id, 'Offer 1', 50.0)

@@ -1,0 +1,13 @@
+[Test Case Name]: Get Offer - Negative (Invalid Offer ID)
+
+[Description]:
+Tests the system's behavior when retrieving an offer with an invalid ID.
+
+[Test Type]: Negative
+
+[Test Steps]:
+1. Send a GET request to /offers/abc
+2. Observe the API response
+
+[Expected Result]:
+A 400 Bad Request response with a validation error message
