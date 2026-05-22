@@ -1,0 +1,14 @@
+[Test Case Name]: Include automated tests and validation - happy path
+
+[Description]:
+Tests whether including automated tests and validation is successful.
+
+[Test Type]: Unit
+
+[Test Steps]:
+1. Initialize the OrderService with a Config object.
+2. Call the include_automated_tests method on the OrderService instance.
+3. Verify that the method returns True.
+
+[Expected Result]:
+True indicating successful inclusion of automated tests and validation.

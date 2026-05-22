@@ -3,7 +3,7 @@ with content GROQ_API_KEY=<<actual key>>
 --------------------------------------------------------------------
 MAC
 --------------------------------------------------------------------
-cd
+cd /Users/pushkarchauhan91/Documents/workspace_pycharm/parent-python/agentic-ai-sdlc-hitl-langgraph
 python3.12 -m venv venv
 source venv/bin/activate
 

@@ -1,0 +1,14 @@
+[Test Case Name]: Upgrade order-offers service to Spring Boot 4 - edge case
+
+[Description]:
+Tests whether upgrading order-offers service to Spring Boot 4 handles edge cases.
+
+[Test Type]: Edge
+
+[Test Steps]:
+1. Initialize the OrderService with a Config object and an empty orders list.
+2. Call the upgrade_order_offers method on the OrderService instance.
+3. Verify that the method does not throw any exceptions.
+
+[Expected Result]:
+No exceptions are thrown, indicating successful handling of edge case.

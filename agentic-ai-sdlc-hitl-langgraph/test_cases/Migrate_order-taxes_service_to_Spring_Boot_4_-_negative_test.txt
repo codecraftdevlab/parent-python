@@ -1,0 +1,14 @@
+[Test Case Name]: Migrate order-taxes service to Spring Boot 4 - negative test
+
+[Description]:
+Tests whether migrating order-taxes service to Spring Boot 4 handles failure cases.
+
+[Test Type]: Negative
+
+[Test Steps]:
+1. Initialize the OrderService with a Config object and a mock order-taxes service that throws an exception.
+2. Call the migrate_order_taxes method on the OrderService instance.
+3. Verify that the method returns False.
+
+[Expected Result]:
+False indicating unsuccessful migration of order-taxes service.

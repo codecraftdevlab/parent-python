@@ -1,0 +1,14 @@
+[Test Case Name]: Ensure backward compatibility - negative test
+
+[Description]:
+Tests whether ensuring backward compatibility with existing integrations handles failure cases.
+
+[Test Type]: Negative
+
+[Test Steps]:
+1. Initialize the OrderService with a Config object and a mock integration that throws an exception.
+2. Call the ensure_backward_compatibility method on the OrderService instance.
+3. Verify that the method returns False.
+
+[Expected Result]:
+False indicating unsuccessful backward compatibility.

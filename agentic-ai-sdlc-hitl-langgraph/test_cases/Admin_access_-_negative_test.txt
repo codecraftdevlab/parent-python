@@ -1,0 +1,13 @@
+[Test Case Name]: Admin access - negative test
+
+[Description]:
+Tests whether admin access handles failure cases.
+
+[Test Type]: Negative
+
+[Test Steps]:
+1. Initialize the Config object with admin access set to None.
+2. Verify that an exception is thrown.
+
+[Expected Result]:
+Exception is thrown indicating invalid admin access.

@@ -1,5 +1,5 @@
 """
-Entry point for the application
+Main entry point for the project.
 """
 
 from api import app

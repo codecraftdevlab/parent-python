@@ -1,0 +1,14 @@
+[Test Case Name]: Upgrade order-offers service to Spring Boot 4 - happy path
+
+[Description]:
+Tests whether upgrading order-offers service to Spring Boot 4 is successful.
+
+[Test Type]: Unit
+
+[Test Steps]:
+1. Initialize the OrderService with a Config object.
+2. Call the upgrade_order_offers method on the OrderService instance.
+3. Verify that the method returns True.
+
+[Expected Result]:
+True indicating successful upgrade of order-offers service.

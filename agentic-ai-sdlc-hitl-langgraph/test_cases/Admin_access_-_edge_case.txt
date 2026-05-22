@@ -1,0 +1,13 @@
+[Test Case Name]: Admin access - edge case
+
+[Description]:
+Tests whether admin access handles edge cases.
+
+[Test Type]: Edge
+
+[Test Steps]:
+1. Initialize the Config object with admin access set to False.
+2. Verify that the admin_access attribute is False.
+
+[Expected Result]:
+False indicating no admin access.

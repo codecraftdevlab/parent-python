@@ -1,70 +1,87 @@
 """
-API endpoints for the application
+API endpoints for the project.
 """
 
-from flask import Flask, jsonify, request
-from models import Order, OrderOffer, OrderPricing, OrderTax
-from services import OrderService, OrderOfferService
+from flask import Flask, request, jsonify
+from services import OrderService, PaymentService
+from models import Order, OrderOffer, OrderPricing, OrderTaxes
 
 app = Flask(__name__)
 
-order_service = OrderService()
-order_offer_service = OrderOfferService()
+order_service = OrderService(Config())
+payment_service = PaymentService(Config())
 
-@app.route('/orders/<int:id>', methods=['GET'])
-def get_order(id: int):
+@app.route('/orders', methods=['GET'])
+def get_orders():
     """
-    Retrieves an order by ID
-
-    Args:
-        id (int): The order ID
-
+    Get all orders.
+    
     Returns:
-        jsonify: The order object as JSON
+        json: A JSON response with the orders.
     """
-    order = order_service.get_order(id)
+    orders = []
+    # Logic to get orders
+    return jsonify(orders)
+
+@app.route('/orders/<int:order_id>', methods=['GET'])
+def get_order(order_id):
+    """
+    Get an order by ID.
+    
+    Args:
+        order_id (int): The order ID.
+    
+    Returns:
+        json: A JSON response with the order.
+    """
+    order = Order(order_id, 1, "2022-01-01")
+    # Logic to get order
     return jsonify(order.__dict__)
 
-@app.route('/orders/<int:id>/pricing', methods=['GET'])
-def get_pricing(id: int):
+@app.route('/orders/<int:order_id>/offers', methods=['GET'])
+def get_order_offers(order_id):
     """
-    Retrieves the pricing for an order
-
+    Get the offers for an order.
+    
     Args:
-        id (int): The order ID
-
+        order_id (int): The order ID.
+    
     Returns:
-        jsonify: The pricing object as JSON
+        json: A JSON response with the offers.
     """
-    order = order_service.get_order(id)
-    pricing = order_service.calculate_pricing(order)
+    offers = []
+    # Logic to get offers
+    return jsonify(offers)
+
+@app.route('/orders/<int:order_id>/pricing', methods=['GET'])
+def get_order_pricing(order_id):
+    """
+    Get the pricing for an order.
+    
+    Args:
+        order_id (int): The order ID.
+    
+    Returns:
+        json: A JSON response with the pricing.
+    """
+    pricing = OrderPricing(1, order_id, 100.0)
+    # Logic to get pricing
     return jsonify(pricing.__dict__)
 
-@app.route('/orders/<int:id>/taxes', methods=['GET'])
-def get_taxes(id: int):
+@app.route('/orders/<int:order_id>/taxes', methods=['GET'])
+def get_order_taxes(order_id):
     """
-    Retrieves the taxes for an order
-
+    Get the taxes for an order.
+    
     Args:
-        id (int): The order ID
-
+        order_id (int): The order ID.
+    
     Returns:
-        jsonify: The tax object as JSON
+        json: A JSON response with the taxes.
     """
-    order = order_service.get_order(id)
-    taxes = order_service.calculate_taxes(order)
+    taxes = OrderTaxes(1, order_id, 10.0)
+    # Logic to get taxes
     return jsonify(taxes.__dict__)
 
-@app.route('/offers/<int:id>', methods=['GET'])
-def get_offer(id: int):
-    """
-    Retrieves an offer by ID
-
-    Args:
-        id (int): The offer ID
-
-    Returns:
-        jsonify: The offer object as JSON
-    """
-    offer = order_offer_service.get_offer(id)
-    return jsonify(offer.__dict__)
+if __name__ == '__main__':
+    app.run(debug=True)

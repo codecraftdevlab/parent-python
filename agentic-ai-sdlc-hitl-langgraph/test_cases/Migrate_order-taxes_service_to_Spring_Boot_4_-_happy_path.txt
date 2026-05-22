@@ -1,0 +1,14 @@
+[Test Case Name]: Migrate order-taxes service to Spring Boot 4 - happy path
+
+[Description]:
+Tests whether migrating order-taxes service to Spring Boot 4 is successful.
+
+[Test Type]: Unit
+
+[Test Steps]:
+1. Initialize the OrderService with a Config object.
+2. Call the migrate_order_taxes method on the OrderService instance.
+3. Verify that the method returns True.
+
+[Expected Result]:
+True indicating successful migration of order-taxes service.
