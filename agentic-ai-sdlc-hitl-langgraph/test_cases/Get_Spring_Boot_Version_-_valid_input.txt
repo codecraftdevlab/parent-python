@@ -1,0 +1,14 @@
+[Test Case Name]: Get Spring Boot Version - valid input
+
+[Description]:
+Tests whether the Config class returns the correct Spring Boot version.
+
+[Test Type]: Unit
+
+[Test Steps]:
+1. Create an instance of the Config class
+2. Call the get_spring_boot_version method
+3. Verify the returned version is "4"
+
+[Expected Result]:
+The returned Spring Boot version is "4"

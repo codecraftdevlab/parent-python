@@ -1,0 +1,14 @@
+[Test Case Name]: Get Spring Boot Version - invalid input
+
+[Description]:
+Validates system's behavior when the Spring Boot version is not set.
+
+[Test Type]: Negative
+
+[Test Steps]:
+1. Create an instance of the Config class with an empty spring_boot_version attribute
+2. Call the get_spring_boot_version method
+3. Observe the API response
+
+[Expected Result]:
+An empty string or a None value is returned

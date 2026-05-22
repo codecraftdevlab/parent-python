@@ -1,0 +1,14 @@
+[Test Case Name]: Test Order-Taxes-Fees Service - failure path
+
+[Description]:
+Validates system's behavior when the order-taxes-fees service test fails.
+
+[Test Type]: Integration
+
+[Test Steps]:
+1. Create a test environment with the order-taxes-fees service and Spring Boot 4
+2. Simulate a failure during the test
+3. Verify an error message is returned
+
+[Expected Result]:
+An error message is returned indicating the order-taxes-fees service test failed

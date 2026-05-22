@@ -1,0 +1,14 @@
+[Test Case Name]: Get Java Version - invalid input
+
+[Description]:
+Validates system's behavior when the Java version is not set.
+
+[Test Type]: Negative
+
+[Test Steps]:
+1. Create an instance of the Config class with an empty java_version attribute
+2. Call the get_java_version method
+3. Observe the API response
+
+[Expected Result]:
+An empty string or a None value is returned

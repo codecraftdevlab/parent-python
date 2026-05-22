@@ -1,0 +1,14 @@
+[Test Case Name]: Get Java Version - valid input
+
+[Description]:
+Tests whether the Config class returns the correct Java version.
+
+[Test Type]: Unit
+
+[Test Steps]:
+1. Create an instance of the Config class
+2. Call the get_java_version method
+3. Verify the returned version is "17"
+
+[Expected Result]:
+The returned Java version is "17"

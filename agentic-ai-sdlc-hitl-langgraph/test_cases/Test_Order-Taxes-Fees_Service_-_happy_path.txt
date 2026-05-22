@@ -1,0 +1,13 @@
+[Test Case Name]: Test Order-Taxes-Fees Service - happy path
+
+[Description]:
+Tests whether the order-taxes-fees service is running correctly after the upgrade to Spring Boot 4.
+
+[Test Type]: Integration
+
+[Test Steps]:
+1. Create a test environment with the order-taxes-fees service and Spring Boot 4
+2. Verify the service is running correctly
+
+[Expected Result]:
+The order-taxes-fees service is running correctly
